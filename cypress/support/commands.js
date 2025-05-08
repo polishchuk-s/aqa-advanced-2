@@ -25,8 +25,13 @@ Cypress.Commands.add('faker', () => {
     return faker;
 });
 
-Cypress.Commands.add('login', (username, password) => {
-    cy.visit('https://guest:welcome2qauto@qauto.forstudy.space');
+Cypress.Commands.add('login', () => {
+    const baseUrl = Cypress.env('baseUrl');
+    const username = Cypress.env('userEmail');
+    const password = Cypress.env('userPassword');
+
+
+    cy.visit(baseUrl);
     cy.get(`button[class$="header_signin"]`).click();
     cy.get(`#signinEmail`).clear();
     cy.get(`#signinEmail`).type(username);
