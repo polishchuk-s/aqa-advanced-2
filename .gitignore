@@ -3,4 +3,6 @@ node_modules
 *.log
 cypress/videos/
 cypress/screenshots/
+cypress/reports
+mochawesome-report
 cypress/e2e/2-advanced-examples
