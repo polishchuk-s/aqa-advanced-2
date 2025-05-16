@@ -53,3 +53,21 @@ Cypress.Commands.overwrite('type', (originalFn, element, text, options) => {
     }
     return originalFn(element, text, options)
   });
+
+
+  Cypress.Commands.add('addExpenses', (carId) => {
+    cy.request('POST', 'https://qauto.forstudy.space/api/expenses', {
+      "carId": carId,
+      "reportedAt": "2025-05-16",
+      "mileage": 250000,
+      "liters": 1000,
+      "totalCost": 1500,
+      "forceMileage": false
+    }).then((response) => {
+      expect(response.status).to.equal(200);
+      expect(response.body.status).to.eq('ok'); 
+      expect(response.body.data).to.have.property('mileage', 250000);
+      expect(response.body.data).to.have.property('liters', 1000);
+      expect(response.body.data).to.have.property('totalCost', 1500);
+    });
+  });
